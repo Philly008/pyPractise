@@ -8,8 +8,9 @@ import urllib.request
 from urllib import robotparser
 from urllib.error import URLError, HTTPError, ContentTooShortError
 from urllib.parse import urljoin
-
+from lxml.html import fromstring
 from py3webscrapy.use_py_scrapy.ch1.throttle import Throttle
+from py3webscrapy.use_py_scrapy.ch2.csv_callback import CsvCallback
 
 
 def download(url, user_agent='wswp', num_retries=2, charset='utf-8', proxy=None):
@@ -37,11 +38,12 @@ def download(url, user_agent='wswp', num_retries=2, charset='utf-8', proxy=None)
 
 
 def link_crawler(start_url, link_regex, robots_url=None, user_agent='wswp', proxy=None, delay=3,
-                 max_depth=4):
+                 max_depth=4, scrape_callback=None):
     """Crawl from the given start URL following links matched by link_regex"""
     crawl_queue = [start_url]
     # keep track which URL's have seen before
     seen = {}
+    data = []
 
     if not robots_url:
         robots_url = '{}/robots.txt'.format(start_url)
@@ -59,6 +61,8 @@ def link_crawler(start_url, link_regex, robots_url=None, user_agent='wswp', prox
             html = download(url, user_agent=user_agent, proxy=proxy)
             if not html:
                 continue
+            if scrape_callback:
+                data.extend(scrape_callback(url, html) or [])
 
             # filter for links matching our regular expression
             for link in get_links(html):
@@ -70,6 +74,21 @@ def link_crawler(start_url, link_regex, robots_url=None, user_agent='wswp', prox
         else:
             print('Blocked by robots.txt: ', url)
 
+
+# 为链接爬虫添加抓取回调
+def scrape_callback(url, html):
+    fields = ('area', 'population', 'iso', 'country_or_district', 'capital',
+              'continent', 'tld', 'currency_code', 'currency_name', 'phone',
+              'postal_code_format', 'postal_code_regex', 'languages', 'neighbours')
+    if re.search('/view/', url):
+        tree = fromstring(html)
+        all_rows = [
+            tree.xpath('//tr[@id="places_%s__row"]/td[@class="w2p_fw"]' %
+                       field)[0].text_content() for field in fields
+        ]
+        print(url, all_rows)
+
+
 def get_links(html):
     """Return a list of links from html"""
     # a regular expression to extract all links from the webpage
@@ -77,6 +96,7 @@ def get_links(html):
     # webpage_regex = re.compile("""<a href=.*>""", re.IGNORECASE)
     # list of all links from the webpage
     return webpage_regex.findall(html)
+
 
 # 解析robots
 def get_robots_parser(robots_url):
@@ -87,7 +107,10 @@ def get_robots_parser(robots_url):
     return rp
 
 if __name__ == '__main__':
-    link_crawler('http://example.python-scraping.com', '/places/default/(index|view)/', max_depth=1)
+    # link_crawler('http://example.python-scraping.com', '/places/default/(index|view)/', max_depth=1)
+    # link_crawler('http://example.python-scraping.com', '/places/default/(index|view)/', scrape_callback=scrape_callback)
+    link_crawler('http://example.python-scraping.com', '/places/default/(index|view)/', max_depth=2,
+                 scrape_callback=CsvCallback())
 
 
 
