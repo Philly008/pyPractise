@@ -38,7 +38,7 @@ class SearchDDT(unittest.TestCase):
         self.driver.get("")
 
     # specify test data using @data decorator
-    @data(*get_data("testdata.csv"))
+    @data(*get_data("333.xlsx"))
     @unpack
     def test_search(self, search_value, expected_count):
         # get the search textbox
@@ -71,4 +71,4 @@ class SearchDDT(unittest.TestCase):
 
 if __name__ == '__main__':
     get_data("testdata.csv")
-    # unittest.main(verbosity=2)
+    unittest.main(verbosity=2)
