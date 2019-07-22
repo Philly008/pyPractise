@@ -1,5 +1,5 @@
 from django.contrib import admin
-from sign.models import Event, Guest
+from dj_pra.guest.sign.models import Event, Guest
 
 
 # Register your models here.

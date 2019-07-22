@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required   # 通过登录才能访问系统
-from sign.models import Event, Guest
+from dj_pra.guest.sign.models import Event, Guest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.

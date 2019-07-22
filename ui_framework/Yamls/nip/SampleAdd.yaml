@@ -1,0 +1,36 @@
+testinfo:
+    - id: test0002
+      title: 打开样本录入
+      info: 样本录入
+testcase:
+    - element_info: userName
+      find_type: id
+      operate_type: send_keys
+      msg: daan
+      info: 输入用户名
+    - element_info: password
+      find_type: id
+      operate_type: send_keys
+      msg: 123@abc
+      info: 输入密码
+    - element_info: btn_login
+      find_type: id
+      operate_type: click
+      info: 点击登录
+    - element_info: left2
+      find_type: id
+      operate_type: move_to_element
+      info: 移向菜单
+    - element_info: //*[@id="treeboxbox_tree"]/div/table/tbody/tr[3]/td[2]/table/tbody/tr[1]/td[4]/span
+      find_type: xpath
+      operate_type: double_click
+      info: 双击分包物流
+    - element_info: 样本录入
+      find_type: link_text
+      operate_type: click
+      info: 点击样本录入
+
+check:
+    - element_info: //*[@id="treeboxbox_tree"]/div/table/tbody/tr[3]/td[2]/table/tbody/tr[8]/td[2]/table/tbody/tr/td[4]/span/a[contains(text(),'样本录入')]
+      find_type: xpath
+      info: 打开样本录入页面

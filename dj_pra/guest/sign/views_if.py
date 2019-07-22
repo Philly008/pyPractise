@@ -4,7 +4,7 @@
 # @File       : views_if.py
 # @Description:
 from django.http import JsonResponse
-from sign.models import Event, Guest
+from dj_pra.guest.sign.models import Event, Guest
 from django.db.utils import IntegrityError
 import time
 from django.core.exceptions import ValidationError, ObjectDoesNotExist

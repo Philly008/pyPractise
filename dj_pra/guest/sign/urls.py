@@ -5,7 +5,7 @@
 # @Description:
 from django.urls import path
 from . import views
-from sign import views_if
+from dj_pra.guest.sign import views_if
 
 
 urlpatterns = [

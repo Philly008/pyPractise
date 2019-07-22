@@ -4,7 +4,7 @@
 # @File       : test_count.py
 # @Description: 
 import unittest
-from count import Calculator
+from dj_pra.guest.count import Calculator
 
 
 class CountTest(unittest.TestCase):

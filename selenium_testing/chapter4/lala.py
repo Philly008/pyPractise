@@ -7,7 +7,7 @@ from time import gmtime, strftime
 
 
 user_name = "user_" + strftime("%Y%m%d%H%M%S", gmtime())
-# print(user_name)
+print(user_name)
 
 
 desired_caps = {}

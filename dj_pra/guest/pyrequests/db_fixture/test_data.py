@@ -5,7 +5,7 @@
 # @Description: 
 import sys
 sys.path.append('../db_fixture')
-from pyrequests.db_fixture.mysql_db import DB
+from dj_pra.guest.pyrequests.db_fixture.mysql_db import DB
 
 
 # create data

@@ -128,7 +128,7 @@ page1.previous_page_number()  # 前一页是第几页
 - 提供丰富的比较方法
 - 提供丰富的日志
 
-单元测试：unittest
+单元测试：unittest  
 HTTP接口自动化测试：unittest+Requests  
 Web UI自动化测试：unittest+Selenium  
 移动自动化测试：unittest+Appium  

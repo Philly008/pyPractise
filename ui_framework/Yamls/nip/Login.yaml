@@ -1,0 +1,24 @@
+testinfo:
+    - id: test0001
+      title: 登录成功
+      info: 登录康源系统
+testcase:
+    - element_info: userName
+      find_type: id
+      operate_type: send_keys
+      msg: daan
+      info: 输入用户名
+    - element_info: password
+      find_type: id
+      operate_type: send_keys
+      msg: 123@abc
+      info: 输入密码
+    - element_info: btn_login
+      find_type: id
+      operate_type: click
+      info: 点击登录
+
+check:
+    - element_info: //*[@id="header"]/div/div/div[2]/div/div[6]/span[contains(text(),'测试用户web')]
+      find_type: xpath
+      info: 验证 测试用户web 登录成功

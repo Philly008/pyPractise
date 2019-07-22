@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from sign import views  # 需要看settings.py的 INSTALLED_APPS设置项目路径导入
+from dj_pra.guest.sign import views  # 需要看settings.py的 INSTALLED_APPS设置项目路径导入
 
 urlpatterns = [
     path('admin/', admin.site.urls),
