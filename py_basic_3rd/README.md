@@ -647,7 +647,12 @@ setup(name='Hello',
 4. 安装：python setup.py install
 5. 打包：python setup.py sdist  
 
-使用py2exe创建可执行程序。  
+使用py2exe创建可执行程序。py2exe目前只支持到python3.5，可以使用pyinstaller打包成exe:  
+```
+pip install pyinstaller
+pyinstaller -F water_to3.py # 打包成exe文件
+```
+
 要让别人能够使用pip安装你开发的包，必须向Python Package Index(PyPI)注册它。  
 python setup.py register  
 注册包后，使用upload将其上传到PyPI.  
